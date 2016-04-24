@@ -112,7 +112,7 @@
                 <div class="col-md-6 fh5co-text">
                   <h2 class="to-animate intro-animate-1">Stress free international travel</h2>
                   <p class="to-animate intro-animate-2">The universal translator you need to go anywhere and everywhere - without using Wifi.</p>
-                  <p class="to-animate intro-animate-3"><a href="https://itunes.apple.com/us/app/trip-icons/id1068047965?mt=8" class="btn btn-primary btn-md"><i class="icon-apple"></i> See on AppStore</a></p>
+                  <p class="to-animate intro-animate-3"><a href="https://itunes.apple.com/us/app/trip-icons/id1068047965?mt=8" class="btn btn-primary btn-md" onclick="trackOutboundLink('https://itunes.apple.com/us/app/trip-icons/id1068047965?mt=8'); return false;"><i class="icon-apple"></i> See on AppStore</a></p>
                 </div>
                 <div class="col-md-6 text-right fh5co-intro-img to-animate intro-animate-4">
                   <img src="images/two_iphones.png" alt="Trip Icons">
@@ -204,6 +204,18 @@
           ga('create', 'UA-76833114-1', 'auto');
           ga('send', 'pageview');
 
+          /**
+          * Function that tracks a click on an outbound link in Analytics.
+          * This function takes a valid URL string as an argument, and uses that URL string
+          * as the event label. Setting the transport method to 'beacon' lets the hit be sent
+          * using 'navigator.sendBeacon' in browser that support it.
+          */
+          var trackOutboundLink = function(url) {
+             ga('send', 'event', 'outbound', 'click', url, {
+               'transport': 'beacon',
+               'hitCallback': function(){document.location = url;}
+             });
+          }
         </script>
       </body>
     </html>
